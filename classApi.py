@@ -1093,15 +1093,15 @@ class APIModelBackEnd:
         df['DIA']=self.DIA
         
 
-        columnaDepar = [x for x in df.columns if "DEPARTAMENTO_" in x and str(self.Marca) == x.split('_')[-1]]
+        columnaDepar = [x for x in df.columns if "DEPARTAMENTO_" in x and str(self.DEPARTAMENTO) == x.split('_')[-1]]
         df[columnaDepar] = 1
-        columnaMunc = [x for x in df.columns if "MUNICIPIO_" in x and str(self.Clase) == x.split('_')[-1]]
+        columnaMunc = [x for x in df.columns if "MUNICIPIO_" in x and str(self.MUNICIPIO) == x.split('_')[-1]]
         df[columnaMunc] = 1
-        columnaArm = [x for x in df.columns if "ARMAS MEDIOS_" in x and str(self.Fechas) == x.split('_')[-1]]
+        columnaArm = [x for x in df.columns if "ARMAS MEDIOS_" in x and str(self.ARMAS_MEDIOS) == x.split('_')[-1]]
         df[columnaArm] = 1
-        columnaGen = [x for x in df.columns if "GENERO_" in x and str(self.Fechas) == x.split('_')[-1]]
+        columnaGen = [x for x in df.columns if "GENERO_" in x and str(self.GENERO) == x.split('_')[-1]]
         df[columnaGen] = 1
-        columnaGrEt = [x for x in df.columns if "GRUPO ETARIO_" in x and str(self.Fechas) == x.split('_')[-1]]
+        columnaGrEt = [x for x in df.columns if "GRUPO ETARIO_" in x and str(self.GRUPO_ETARIO) == x.split('_')[-1]]
         df[columnaGrEt] = 1
         return df
 
