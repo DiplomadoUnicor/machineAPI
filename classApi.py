@@ -93,7 +93,7 @@ class ModelInput(PydanticBaseModel):
             "example": {
                 'DEPARTAMENTO': "CÓRDOBA",
                 'MUNICIPIO': "MONTERÍA (CT)",
-                'ARMAS MEDIOS':"CONTUNDENTE",
+                'ARMAS_MEDIOS':"CONTUNDENTE",
                 'AÑO':2015,
                 'MES':5,
                 'DIA':9,
