@@ -93,7 +93,7 @@ class ModelInput(PydanticBaseModel):
             "example": {
                 'DEPARTAMENTO': "CÓRDOBA",
                 'MUNICIPIO': "MONTERÍA (CT)",
-                'ARMAS_MEDIOS':"CONTUNDENTE",
+                'ARMAS_MEDIOS':"CONTUNDENTES",
                 'AÑO':2015,
                 'MES':5,
                 'DIA':9,
@@ -126,8 +126,9 @@ class APIModelBackEnd:
 
     def _load_model(self, model_filename: str = "modeloViolencia.pkl"):
         self.model_filename = model_filename
+        self.model = joblib.load(self.model_filename)
         try:           
-            self.model = joblib.load(self.model_filename)
+            self.model = joblib.load(self.model_filename)    
         except Exception:
            
             raise HTTPException(
@@ -1086,7 +1087,7 @@ class APIModelBackEnd:
  'GRUPO ETARIO_NO REPORTA']
         
         #df = pd.DataFrame(columns=columnas,data=[[*[0]*len(f2)]])
-        df = pd.DataFrame(columns=columnas,data=[*[0]*len(columnas)])
+        df = pd.DataFrame(columns=columnas,data=[[*[0]*len(columnas)]])
         
         df['AÑO']=self.AÑO
         df['MES']=self.MES
@@ -1099,14 +1100,18 @@ class APIModelBackEnd:
         df[columnaMunc] = 1
         columnaArm = [x for x in df.columns if "ARMAS MEDIOS_" in x and str(self.ARMAS_MEDIOS) == x.split('_')[-1]]
         df[columnaArm] = 1
-        columnaGen = [x for x in df.columns if "GENERO_" in x and str(self.GENERO) == x.split('_')[-1]]
+        print([x.split('_')[-1] for x in df.columns])
+        columnaGen = [x for x in df.columns if "GENERO_" in str(x) and str(self.GENERO) == str(x).split('_')[-1]]
         df[columnaGen] = 1
         columnaGrEt = [x for x in df.columns if "GRUPO ETARIO_" in x and str(self.GRUPO_ETARIO) == x.split('_')[-1]]
         df[columnaGrEt] = 1
+        
         return df
+
 
     def predict(self, y_name: str = "CANTIDAD"):
         self._load_model()
+        
         x = self._prepare_data()
         prediction = pd.DataFrame(self.model.predict(x)).rename(columns={0: y_name})
         return prediction.to_dict(orient="records")

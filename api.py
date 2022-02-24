@@ -22,7 +22,8 @@ async def predict_proba(inputs: List[ModelInput]):
         # Esta sería la línea que cambiamos en este archivo, podemos los inputs que necesitemos.
         # Esto es, poner Input.Nombre_Atributo
         model = APIModelBackEnd(
-            Input.AÑO, Input.MES, Input.DIA, Input.GENERO, Input.GRUPO_ETARIO, Input.ARMAS_MEDIOS, Input.MUNICIPIO, Input.DEPARTAMENTO
+            Input.DEPARTAMENTO, Input.MUNICIPIO, Input.ARMAS_MEDIOS, Input.AÑO,Input.MES, Input.DIA, Input.GENERO, Input.GRUPO_ETARIO
+            #,  Input.DIA, Input.GENERO, Input.GRUPO_ETARIO, Input.ARMAS_MEDIOS, Input.MUNICIPIO, Input.DEPARTAMENTO
         )
         response.append(model.predict()[0])
     # Retorna  la lista con todas las predicciones hechas.
