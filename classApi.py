@@ -110,7 +110,7 @@ class ModelOutput(PydanticBaseModel):
     class Config:
         schema_extra = {
             "example":{
-                "AUMENTO": 2.9}}
+                "AUMENTO": 12.9}}
 
 class APIModelBackEnd:
     

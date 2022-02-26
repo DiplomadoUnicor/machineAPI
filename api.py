@@ -3,24 +3,14 @@ from typing import List
 from classApi import ModelInput, ModelOutput, APIModelBackEnd
 
 # Creamos el objeto app
-app = FastAPI(title="API de Machine Learning del Diplomado", version="1.0.0")
-
-# Con el decorador, ponemos en el endpoint /predict la funcionalidad de la función predict_proba
-# response_model=List[ModelOuput] es que puede responder una lista de instancias válidas de ModelOutput
-# En la definición, le decimos que los Inputs son una lista de ModelInput.
-# Así, la API recibe para hacer multiples predicciones
+app = FastAPI(title="API de ML del Diplomado", version="1.1.0")
 
 
 @app.post("/predict", response_model=List[ModelOutput])
-async def predict_proba(inputs: List[ModelInput]):
-    """Endpoint de predicción de la API"""
-    # Creamos una lista vacía con las respuestas
+async def predict_(inputs: List[ModelInput]):
     response = list()
     # Iteramos por todas las entradas que damos
     for Input in inputs:
-        # Usamos nuestra Clase en el backenp para predecir con nuestros inputs.
-        # Esta sería la línea que cambiamos en este archivo, podemos los inputs que necesitemos.
-        # Esto es, poner Input.Nombre_Atributo
         model = APIModelBackEnd(
             Input.DEPARTAMENTO, Input.MUNICIPIO, Input.ARMAS_MEDIOS, Input.AÑO,Input.MES, Input.DIA, Input.GENERO, Input.GRUPO_ETARIO
             #,  Input.DIA, Input.GENERO, Input.GRUPO_ETARIO, Input.ARMAS_MEDIOS, Input.MUNICIPIO, Input.DEPARTAMENTO
